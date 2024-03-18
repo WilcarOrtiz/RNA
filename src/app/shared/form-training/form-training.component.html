@@ -1,0 +1,29 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+    <label for="" class="text-white font-bold">1. Carga tu banco de datos</label>
+    <input type="file" formControlName='banco' class="text-white my-2 ml-4">
+    <label for="" class="text-white font-bold ">2. Selecciona tus funciones</label>
+    <div class="table-caption">
+        <select name="" id="" formControlName="function1" class="ml-4 mt-1 w-40">
+            <option value=""></option>
+            <option value="Regla delta">Regla delta</option>
+        </select>
+        <select name="" id="" formControlName="function2" class="ml-4 my-1 w-40">
+            <option value=""></option>
+            <option value="Limitador duro">Limitador duro</option>
+        </select>
+    </div>
+    
+    <label for="" class="text-white font-bold">3. Parametros de entrenamiento</label>
+    <div class="block ml-4">
+        <label class="text-white italic">Rata de aprendizaje: </label>
+        <span class="text-white">{{form.value.learningRate}}</span>
+        <input type="range" min="0" max="1" step="0.01" placeholder="Rata de aprendizaje" formControlName="learningRate">
+        
+        <input type="number" min="1" placeholder="# de iteraciones" formControlName="iterations">
+        <br>
+        <label class="text-white italic">Error máximo permitido: </label>
+        <span class="text-white">{{form.value.maxError}}</span>
+        <input type="range" min="0" max="1" step="0.01" placeholder="Error máximo permitido" formControlName="maxError">
+    </div>
+    <button type="submit" class="bg-white">Entrenar</button>
+</form>

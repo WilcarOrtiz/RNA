@@ -1,0 +1,16 @@
+.desplegable {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-out;
+}
+
+.desplegable.mostrar {
+  height: 60vh;
+}
+
+.opcion {
+    border-radius: 6px;
+    box-shadow: 0px 0px 7px 0px blue;
+    border-bottom: 1px solid #009688;
+    margin-bottom: 8%;
+}
