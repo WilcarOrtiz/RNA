@@ -1,0 +1,75 @@
+import { Injectable } from "@angular/core";
+import * as XLSX from "XLSX";
+
+interface Data {
+  threshold: number[] | number[][];
+  weights: number[] | number[][];
+}
+
+@Injectable({
+  providedIn: "root",
+})
+export class ExcelService {
+  constructor() {}
+
+  relativePath: string = "assets/db/";
+
+  generateFileName(): string {
+    const date = new Date();
+    const dateFormat = date.toISOString().replace(/[-T:\.Z]/g, "");
+    return `Informacion_${dateFormat}`;
+  }
+
+  SaveExcelPesosUmbrales(pesos: any, umbral: any) {
+    const fileName = this.generateFileName();
+    const wb = XLSX.utils.book_new();
+    const ws_pesos = XLSX.utils.aoa_to_sheet(pesos);
+    const ws_umbral = XLSX.utils.aoa_to_sheet([umbral]);
+    XLSX.utils.book_append_sheet(wb, ws_pesos, "Pesos");
+    XLSX.utils.book_append_sheet(wb, ws_umbral, "Umbral");
+    const filePath = `${this.relativePath}${fileName}.xlsx`;
+    XLSX.writeFile(wb, filePath);
+  }
+
+  readExcelPesosUmbrales(event: any): Promise<{ pesos: any[]; umbral: any[] }> {
+    return new Promise((resolve, reject) => {
+      const archivo = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const data = new Uint8Array(e.target.result);
+        const pesosSheet = XLSX.read(data, { type: "array" }).Sheets["Pesos"];
+        const umbralSheet = XLSX.read(data, { type: "array" }).Sheets["Umbral"];
+        const pesosData = XLSX.utils.sheet_to_json(pesosSheet, { header: 1 });
+        const umbralData = XLSX.utils.sheet_to_json(umbralSheet, { header: 1 });
+        resolve({ pesos: pesosData, umbral: umbralData });
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsArrayBuffer(archivo);
+    });
+  }
+
+  readExcelBD(event: any): Promise<any[]> {
+    let data: any;
+    let file = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    return new Promise<any[][]>((resolve, reject) => {
+      fileReader.onload = (e) => {
+        var workbook = XLSX.read(fileReader.result, { type: "binary" });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        data = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        const matriz: any[][] = [];
+        for (let i = 0; i < data.length; i++) {
+          matriz.push(Object.values(data[i]));
+        }
+        resolve(data);
+      };
+    });
+  }
+}

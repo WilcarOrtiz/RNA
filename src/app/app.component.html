@@ -1,10 +1,12 @@
 <!-- app.component.html -->
+<input type="file" (change)="LeerExcel($event)" />
+
 <div class="flex h-screen bg-black">
   <!-- Sidebar / Drawer -->
   <app-sidebar></app-sidebar>
   <!-- Content -->
   <div class="ml-72 p-6">
     <h1 class="text-3xl font-semibold text-gray-800">Bienvenido</h1>
-    <img src="assets/home.jpeg" alt="" srcset="" height="100px">
+    <img src="assets/home.jpeg" alt="" srcset="" height="100px" />
   </div>
 </div>
