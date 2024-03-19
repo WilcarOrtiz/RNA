@@ -96,18 +96,14 @@ export class EntrenamientoService {
         ).toFixed(2)
       );
       this.ErrorIteracion.push(errorIteracion);
-
       iteracionActual++;
       this.iteracionErrorArray.push({
         i: iteracionActual,
         error: errorIteracion,
       });
       if (errorIteracion <= ErrorMaximoPermitido) {
-        console.log(this.iteracionErrorArray);
         this.funcionBase.SaveExcelPesosUmbrales(this.pesos, this.umbral);
         break;
-      } else {
-        console.log("Debe seguir");
       }
     }
   }

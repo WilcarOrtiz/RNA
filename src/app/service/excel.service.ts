@@ -11,31 +11,33 @@ interface Data {
 })
 export class ExcelService {
   constructor() {}
-
+  nombreDocumento: string = "";
   relativePath: string = "assets/db/";
 
-  generateFileName(): string {
-    const date = new Date();
-    const dateFormat = date.toISOString().replace(/[-T:\.Z]/g, "");
-    return `Informacion_${dateFormat}`;
+  generateFileName(nombreCompleto: string): string {
+    let puntoPosicion = nombreCompleto.lastIndexOf(".");
+
+    if (puntoPosicion > -1) {
+      return nombreCompleto.substring(0, puntoPosicion) + "_optimo";
+    } else {
+      return nombreCompleto + "_optimo";
+    }
   }
 
   SaveExcelPesosUmbrales(pesos: any, umbral: any) {
-    const fileName = this.generateFileName();
     const wb = XLSX.utils.book_new();
     const ws_pesos = XLSX.utils.aoa_to_sheet(pesos);
     const ws_umbral = XLSX.utils.aoa_to_sheet([umbral]);
     XLSX.utils.book_append_sheet(wb, ws_pesos, "Pesos");
     XLSX.utils.book_append_sheet(wb, ws_umbral, "Umbral");
-    const filePath = `${this.relativePath}${fileName}.xlsx`;
+    const filePath = `${this.nombreDocumento}.xlsx`;
     XLSX.writeFile(wb, filePath);
   }
 
-  readExcelPesosUmbrales(event: any): Promise<{ pesos: any[]; umbral: any[] }> {
+  readExcelPesosUmbrales(event: any): Promise<{ pesos: any; umbral: any }> {
     return new Promise((resolve, reject) => {
       const archivo = event.target.files[0];
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
         const data = new Uint8Array(e.target.result);
         const pesosSheet = XLSX.read(data, { type: "array" }).Sheets["Pesos"];
@@ -48,7 +50,6 @@ export class ExcelService {
       reader.onerror = (error) => {
         reject(error);
       };
-
       reader.readAsArrayBuffer(archivo);
     });
   }
@@ -56,6 +57,7 @@ export class ExcelService {
   readExcelBD(event: any): Promise<any[]> {
     let data: any;
     let file = event.target.files[0];
+    this.nombreDocumento = this.generateFileName(file.name);
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
     return new Promise<any[][]>((resolve, reject) => {
