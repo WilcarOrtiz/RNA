@@ -1,6 +1,10 @@
 <!-- app.component.html -->
 <input type="file" (change)="LeerExcel($event)" />
 
+<input class="bg-blue-200" type="file" (change)="leerBaseNueva($event)" />
+
+<input class="bg-blue-500" type="file" (change)="leerPesosUmbrales($event)" />
+<button class="bg-green-200" (click)="simulacion()">simular</button>
 <div class="flex h-screen bg-black">
   <!-- Sidebar / Drawer -->
   <app-sidebar></app-sidebar>

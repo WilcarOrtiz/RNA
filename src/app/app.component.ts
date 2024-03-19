@@ -7,6 +7,7 @@ import { DibujoComponent } from "./shared/dibujo/dibujo.component";
 import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { ParameterizationInitialService } from "./service/parameterization-initial.service";
 import { EntrenamientoService } from "./service/training.service";
+import { SimulationService } from "./service/simulation.service";
 
 @Component({
   selector: "app-root",
@@ -34,7 +35,8 @@ export class AppComponent {
   constructor(
     private excelService: ExcelService,
     private parameterizationInitialService: ParameterizationInitialService,
-    private entrenamientoServicio: EntrenamientoService
+    private entrenamientoServicio: EntrenamientoService,
+    private simulacio: SimulationService
   ) {}
 
   LeerExcel(event: any) {
@@ -96,6 +98,17 @@ export class AppComponent {
           : alert("No se cargaron los patrones de entrada");
       })
       .catch();
+  }
+
+  simulacion() {
+    this.simulacio.simulacion(
+      this.Data,
+      this.pesos,
+      this.umbral,
+      this.entradas,
+      this.salidas,
+      "1234"
+    );
   }
 
   leerPesosUmbrales(event: any) {
