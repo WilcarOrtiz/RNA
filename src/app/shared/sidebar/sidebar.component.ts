@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormTrainingComponent } from '../form-training/form-training.component';
 import { FormSimulationComponent } from '../form-simulation/form-simulation.component';
 
@@ -11,6 +11,10 @@ import { FormSimulationComponent } from '../form-simulation/form-simulation.comp
 })
 export class SidebarComponent {
   seleccionado = "Entrenamiento";
+  @Output() seleccionadoChange = new EventEmitter<string>();
 
-
+  cambiarDatos(param: any) {
+    console.log('sidebar', param)
+    this.seleccionadoChange.emit(param);
+  }
 }

@@ -54,9 +54,8 @@ export class ExcelService {
     });
   }
 
-  readExcelBD(event: any): Promise<any[]> {
+  readExcelBD(file: File): Promise<any[]> {
     let data: any;
-    let file = event.target.files[0];
     this.nombreDocumento = this.generateFileName(file.name);
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
@@ -74,4 +73,5 @@ export class ExcelService {
       };
     });
   }
+  
 }

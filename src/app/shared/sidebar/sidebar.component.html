@@ -4,13 +4,13 @@
     </div>
     
     <nav>
-      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Entrenamiento' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)="seleccionado = 'Entrenamiento'">
+      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Entrenamiento' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)='seleccionado="Entrenamiento"'>
         <span class="mx-3">Entrenamiento</span>
       </a>
       <div class="{{seleccionado === 'Simulación'? 'desplegable': 'desplegable mostrar'}}">
-        <app-form-training></app-form-training>
+        <app-form-training (cambioDatosNieto)="cambiarDatos($event)"></app-form-training>
     </div>
-      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulación' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)="seleccionado = 'Simulación'">
+      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulación' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)='seleccionado="Simulación"'>
         <span class="mx-3">Simulación</span>
       </a>
       <div class="{{seleccionado === 'Simulación'? 'desplegable mostrar' : 'desplegable'}}">

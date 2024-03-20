@@ -1,9 +1,22 @@
+<!-- app.component.html -->
 <div class="flex h-screen bg-black">
   <!-- Sidebar / Drawer -->
-  <app-sidebar></app-sidebar>
+  <app-sidebar
+    (seleccionadoChange)="recibirDatos($event)"
+  ></app-sidebar>
   <!-- Content -->
-  <div class="ml-72 p-6">
-    <h1 class="text-3xl font-semibold text-gray-800">Bienvenido</h1>
-    <img src="assets/home.jpeg" alt="" srcset="" height="100px" />
+  <div class="ml-72 p-6 w-full" style="text-align: -webkit-center;">
+    @if (seleccionado == 'Entrenamiento') {
+    <app-training [datos]="datos"></app-training>
+    } @else if(seleccionado == 'Simulación'){
+    <app-simulation></app-simulation>
+    } @else {
+      <div class="text-start">
+        <h1 class="text-3xl font-semibold text-gray-700">Bienvenido(a)</h1>
+        <p class="text-white">◀️ Entrena tu red neuronal.</p>
+      </div>
+
+    <img src="assets/home.jpeg" alt="" class="h-5/6">
+    }
   </div>
 </div>

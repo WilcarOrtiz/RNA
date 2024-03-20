@@ -1,15 +1,23 @@
 <form [formGroup]="form" (submit)="onSubmit()">
     <label for="" class="text-white font-bold">1. Carga tu banco de datos</label>
-    <input type="file" formControlName='banco' class="text-white my-2 ml-4">
+    <input type="file" formControlName='banco' class="text-white my-2 ml-4" (change)="cargarArchivo($event)">
     <label for="" class="text-white font-bold ">2. Selecciona tus funciones</label>
     <div class="table-caption">
         <select name="" id="" formControlName="function1" class="ml-4 mt-1 w-40">
             <option value=""></option>
-            <option value="Regla delta">Regla delta</option>
+            @for (function of listFunciones; track $index) {
+                @if (function.type == 'entrenamiento') {
+                    <option value="{{function.code}}">{{function.name}}</option>
+                }
+            }
         </select>
         <select name="" id="" formControlName="function2" class="ml-4 my-1 w-40">
             <option value=""></option>
-            <option value="Limitador duro">Limitador duro</option>
+            @for (function of listFunciones; track $index) {
+                @if (function.type == 'activacion') {
+                    <option value="{{function.code}}">{{function.name}}</option>
+                }
+            }
         </select>
     </div>
     

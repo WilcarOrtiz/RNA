@@ -1,4 +1,4 @@
-import { Component, Input, Injectable } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 
 export interface node {
@@ -18,45 +18,48 @@ export interface links {
   standalone: true,
   imports: [NgxGraphModule],
   templateUrl: './dibujo.component.html',
-  styleUrl: './dibujo.component.css',
 })
 export class DibujoComponent {
-  @Input({ required: true }) NumEntradas!: any;
-  @Input({ required: true }) NumNeuronas!: any;
+  @Input() NumEntradas: any;
+  @Input() NumNeuronas: any;
   //Declaracion de parametros
   neuronas: node[] = [];
   entrada: node[] = [];
   salida: node[] = [];
   nodos: node[] = [];
 
+  
+
   //declaracion de enlaces
   links: links[] = [];
 
   constructor() {
+    console.log(this.NumEntradas)
     this.dibujar();
+    
   }
 
   dibujar() {
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= this.NumNeuronas; i++) {
       this.neuronas.push({
         id: `N${i}`,
         label: `N${i}`,
       });
     }
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= this.NumEntradas; i++) {
       this.entrada.push({
         id: `E${i}`,
         label: `E${i}`,
       });
     }
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= this.NumNeuronas; i++) {
       this.salida.push({
         id: `S${i}`,
         label: `S${i}`,
       });
     }
     this.nodos = this.neuronas.concat(this.entrada, this.salida);
-
+    
     this.entrada.map((item) => {
       this.neuronas.map((itemNeurona) => {
         this.links.push({
