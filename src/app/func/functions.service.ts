@@ -24,8 +24,13 @@ export class FunctionsService {
   listFunction: Array<Funciones> = [];
 
   constructor() {
-    const limitadorDuro: Funcion = (Si: number[]) =>
-      Si.map((element) => (element >= 0 ? 1 : 0));
+    const limitadorDuro = (Si: number | number[]): number[] => {
+      if (Array.isArray(Si)) {
+        return Si.map((element) => (element >= 0 ? 1 : 0));
+      } else {
+        return [Si >= 0 ? 1 : 0];
+      }
+    };
     const reglaDelta: Funcion = (
       pesos: Array<Array<number>>,
       patron: Array<number>,

@@ -11,6 +11,4 @@ import { GraphErrorComponent } from '../graph-error/graph-error.component';
 })
 export class TrainingComponent {
   @Input() datos: any;
-
-  
 }
