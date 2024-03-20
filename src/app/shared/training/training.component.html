@@ -4,5 +4,5 @@
     <h3 class="text-white">N de entradas: {{datos.entradas}}</h3>
     <h3 class="text-white">N de salidas: {{datos.salidas}}</h3>
     <h3 class="text-white">N de patrones: {{datos.patrones}}</h3>
-    <app-dibujo [NumEntradas]="7" [NumNeuronas]="datos"></app-dibujo>
+    <app-dibujo [NumEntradas]="datos.entradas" [NumNeuronas]="datos.salidas"></app-dibujo>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 
 export interface node {
@@ -20,39 +20,43 @@ export interface links {
   templateUrl: './dibujo.component.html',
 })
 export class DibujoComponent {
-  @Input() NumEntradas: any;
-  @Input() NumNeuronas: any;
+  @Input({required: true}) NumEntradas!: any;
+  @Input({required: true}) NumNeuronas!: any;
   //Declaracion de parametros
   neuronas: node[] = [];
   entrada: node[] = [];
   salida: node[] = [];
   nodos: node[] = [];
 
-  
-
+  Nentrada: number = 0;
+  Nneurona: number = 0;
+  Nsalida: number = 0;
   //declaracion de enlaces
   links: links[] = [];
 
-  constructor() {
+  ngOnInit() {
     console.log(this.NumEntradas)
     this.dibujar();
     
   }
 
   dibujar() {
-    for (let i = 1; i <= this.NumNeuronas; i++) {
+    this.Nentrada = this.NumEntradas
+    this.Nneurona = this.NumNeuronas
+    this.Nsalida = this.NumNeuronas
+    for (let i = 1; i <= this.Nneurona; i++) {
       this.neuronas.push({
         id: `N${i}`,
         label: `N${i}`,
       });
     }
-    for (let i = 1; i <= this.NumEntradas; i++) {
+    for (let i = 1; i <= this.Nentrada; i++) {
       this.entrada.push({
         id: `E${i}`,
         label: `E${i}`,
       });
     }
-    for (let i = 1; i <= this.NumNeuronas; i++) {
+    for (let i = 1; i <= this.Nsalida; i++) {
       this.salida.push({
         id: `S${i}`,
         label: `S${i}`,
