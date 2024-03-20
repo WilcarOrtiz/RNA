@@ -37,5 +37,12 @@ export class FormSimulationComponent {
     Nentrada: number,
     Nsalida: number,
     codActivacion: string  //codigo de la funcion el del select (solo muestras el selec de las funcuones de activacion)
-  ): */
+  ):
+
+   ESTO TE VA A DEVOLVER UN RETORNA UN ARRAY DE OBJETOS
+        yd: Un array que contiene la salida deseada de la red neuronal para un patrón de entrada.
+        yr: Un array que contiene la salida real de la red neuronal para un patrón de entrada.
+
+        es asi debido a que aja la salida son vectoriales 
+  */
 }
