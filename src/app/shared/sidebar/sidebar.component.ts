@@ -12,9 +12,8 @@ import { FormSimulationComponent } from '../form-simulation/form-simulation.comp
 export class SidebarComponent {
   seleccionado = "Entrenamiento";
   @Output() seleccionadoChange = new EventEmitter<string>();
-
+  
   cambiarDatos(param: any) {
-    console.log('sidebar', param)
     this.seleccionadoChange.emit(param);
   }
 }

@@ -5,9 +5,6 @@ import { RouterOutlet } from "@angular/router";
 import { MessageComponent } from "./shared/message/message.component";
 import { DibujoComponent } from "./shared/dibujo/dibujo.component";
 import { SidebarComponent } from "./shared/sidebar/sidebar.component";
-import { ParameterizationInitialService } from "./service/parameterization-initial.service";
-import { EntrenamientoService } from "./service/training.service";
-import { SimulationService } from "./service/simulation.service";
 import { TrainingComponent } from "./shared/training/training.component";
 import { SimulationComponent } from "./shared/simulation/simulation.component";
 
@@ -23,7 +20,7 @@ import { SimulationComponent } from "./shared/simulation/simulation.component";
         DibujoComponent,
         SidebarComponent,
         TrainingComponent,
-        SimulationComponent
+        SimulationComponent,
     ]
 })
 export class AppComponent {
