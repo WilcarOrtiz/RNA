@@ -56,6 +56,8 @@ export class FormTrainingComponent {
       iteraciones: this.form.get("iterations")!.value,
       error: this.form.get("maxError")!.value,
       seleccionado: nuevoSeleccionado,
+      pesosInicial: this.pesosInicial,
+      umbralInicial: this.umbralInicial
     };
     this.cambioDatosNieto.emit(datos);
   }
