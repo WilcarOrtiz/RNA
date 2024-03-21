@@ -1,37 +1,68 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-    <label for="" class="text-white font-bold">1. Carga tu banco de datos</label>
-    <input type="file" formControlName='banco' class="text-white my-2 ml-4" (change)="cargarArchivo($event)">
-    <label for="" class="text-white font-bold ">2. Selecciona tus funciones</label>
-    <div class="table-caption">
-        <select name="" id="" formControlName="function1" class="ml-4 mt-1 w-40">
-            <option value=""></option>
-            @for (function of listFunciones; track $index) {
-                @if (function.type == 'entrenamiento') {
-                    <option value="{{function.code}}">{{function.name}}</option>
-                }
-            }
-        </select>
-        <select name="" id="" formControlName="function2" class="ml-4 my-1 w-40">
-            <option value=""></option>
-            @for (function of listFunciones; track $index) {
-                @if (function.type == 'activacion') {
-                    <option value="{{function.code}}">{{function.name}}</option>
-                }
-            }
-        </select>
+  <div class="flex justify-center items-center h-full mb-5">
+    <app-button-file-upload
+      formControlName="banco"
+      texto="  Info. Entrenamiento"
+      (change)="cargarArchivo($event)"
+    >
+    </app-button-file-upload>
+  </div>
+
+  <label for="" class="text-white font-bold">Funciones</label>
+  <div class="flex justify-between gap-4 mb-5 ml-3">
+    <select name="" id="" formControlName="function1" class="select w-full">
+      <option value=""></option>
+      @for (function of listFunciones; track $index) { @if (function.type ==
+      'entrenamiento') {
+      <option value="{{function.code}}">{{function.name}}</option>
+      } }
+    </select>
+    <select name="" id="" formControlName="function2" class="select w-full">
+      <option value=""></option>
+      @for (function of listFunciones; track $index) { @if (function.type ==
+      'activacion') {
+      <option value="{{function.code}}">{{function.name}}</option>
+      } }
+    </select>
+  </div>
+
+  <label for="" class="text-white font-bold">Parametros de entrenamiento</label>
+  <div class="block ml-4 mb-5">
+    <div class="textInputWrapper">
+      <input
+        type="number"
+        min="1"
+        placeholder="Num de iteraciones"
+        class="textInput"
+      />
     </div>
-    
-    <label for="" class="text-white font-bold">3. Parametros de entrenamiento</label>
-    <div class="block ml-4">
-        <label class="text-white italic">Rata de aprendizaje: </label>
-        <span class="text-white">{{form.value.learningRate}}</span>
-        <input type="range" min="0" max="1" step="0.01" placeholder="Rata de aprendizaje" formControlName="learningRate">
-        
-        <input type="number" min="1" placeholder="# de iteraciones" formControlName="iterations">
-        <br>
-        <label class="text-white italic">Error máximo permitido: </label>
-        <span class="text-white">{{form.value.maxError}}</span>
-        <input type="range" min="0" max="1" step="0.01" placeholder="Error máximo permitido" formControlName="maxError">
-    </div>
-    <button type="submit" class="bg-white">Entrenar</button>
+    <label class="text-white italic">Rata de aprendizaje: </label>
+    <span class="text-white">{{form.value.learningRate}}</span>
+    <input
+      id="myRange"
+      class="slider"
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      placeholder="Rata de aprendizaje"
+      formControlName="learningRate"
+    />
+
+    <label class="text-white italic">Error máximo permitido: </label>
+    <span class="text-white">{{form.value.maxError}}</span>
+    <input
+      id="myRange"
+      class="slider"
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      placeholder="Error máximo permitido"
+      formControlName="maxError"
+    />
+  </div>
+  <div class="flex justify-center items-center h-full">
+    <button type="submit" class="button">Entrenar</button>
+  </div>
 </form>

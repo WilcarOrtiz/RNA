@@ -8,13 +8,20 @@ import {
 import { SimulationService } from "../../service/simulation.service";
 import { ExcelService } from "../../service/excel.service";
 import { ParameterizationInitialService } from "../../service/parameterization-initial.service";
+import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upload.component";
 
 @Component({
   selector: "app-form-simulation",
   standalone: true,
-  imports: [ReactiveFormsModule],
   templateUrl: "./form-simulation.component.html",
-  styleUrl: "./form-simulation.component.css",
+  styleUrls: [
+    "./form-simulation.component.css",
+    "../../styles/slider.style.css",
+    "../../styles/button.style.css",
+    "../../styles/input.style.css",
+    "../../styles/select.style.css",
+  ],
+  imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
 export class FormSimulationComponent {
   pesos: any;
@@ -48,11 +55,13 @@ export class FormSimulationComponent {
         this.arrayEntrada = nEntradas.map(Number); 
         this.arraySalida = nSalidas.map(Number); 
       } else {
-        alert('No concuerda la cantidad de entradas y/o salidas a las del banco de datos. ❌')
+        alert(
+          "No concuerda la cantidad de entradas y/o salidas a las del banco de datos. ❌"
+        );
       }
-    } 
+    }
   }
-  
+
   onSubmit() {
     if (this.form.valid) {
       this.division();
@@ -67,8 +76,6 @@ export class FormSimulationComponent {
       alert("Por favor, llena todos los campos del formulario.");
     }
   }
-  
-  
 
   cargarArchivo(event: any, param: string) {
     if (event.target.files && event.target.files.length) {
@@ -92,7 +99,6 @@ export class FormSimulationComponent {
         });
     });
   }
-  
 
   leerExcel(event: any) {
     return new Promise<void>((resolve, reject) => {
@@ -119,7 +125,7 @@ export class FormSimulationComponent {
 
   simulacion() {
     this.simulation.simulacion(
-      this.form.get("patron")?.value == 'bancoDatos' ? false : true, // true cuando es patron , falso cuando es un conjunto de patrones
+      this.form.get("patron")?.value == "bancoDatos" ? false : true, // true cuando es patron , falso cuando es un conjunto de patrones
       this.Data, // es la que te da la funcion readExcelBD (osea lo mismo del entrenamiento)
       this.arrayEntrada, // informacion del input de patron de entrada en forma de vector
       this.arraySalida, // informacion del input de patron de salida en forma de vector
@@ -131,10 +137,12 @@ export class FormSimulationComponent {
     );
   }
 
-  constructor(private simulation: SimulationService, private excelService: ExcelService, private parameterizationInitialService: ParameterizationInitialService){
-
-  }
-
-
-
+  constructor(
+    private simulation: SimulationService,
+    private excelService: ExcelService,
+    private parameterizationInitialService: ParameterizationInitialService
+  ) {}
 }
+
+/*
+  } */
