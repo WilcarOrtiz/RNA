@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-simulation',
+  selector: "app-simulation",
   standalone: true,
   imports: [],
-  templateUrl: './simulation.component.html',
-  styleUrl: './simulation.component.css'
+  templateUrl: "./simulation.component.html",
+  styleUrl: "./simulation.component.css",
 })
-export class SimulationComponent {
-
-}
+export class SimulationComponent {}
