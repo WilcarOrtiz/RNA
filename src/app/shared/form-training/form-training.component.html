@@ -1,22 +1,23 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <label for="" class="text-white font-bold">1. Carga tu banco de datos</label>
-  <app-button-file-upload
-    formControlName="banco"
-    texto="  Info. Entrenamiento"
-    (change)="cargarArchivo($event)"
-  >
-  </app-button-file-upload>
+  <div class="flex justify-center items-center h-full mb-5">
+    <app-button-file-upload
+      formControlName="banco"
+      texto="  Info. Entrenamiento"
+      (change)="cargarArchivo($event)"
+    >
+    </app-button-file-upload>
+  </div>
 
-  <label for="" class="text-white font-bold">2. Selecciona tus funciones</label>
-  <div class="table-caption">
-    <select name="" id="" formControlName="function1" class="ml-4 mt-1 w-40">
+  <label for="" class="text-white font-bold">Funciones</label>
+  <div class="flex justify-between gap-4 mb-5 ml-3 ">
+    <select name="" id="" formControlName="function1" class="select w-full">
       <option value=""></option>
       @for (function of listFunciones; track $index) { @if (function.type ==
       'entrenamiento') {
       <option value="{{function.code}}">{{function.name}}</option>
       } }
     </select>
-    <select name="" id="" formControlName="function2" class="ml-4 my-1 w-40">
+    <select name="" id="" formControlName="function2" class="select w-full">
       <option value=""></option>
       @for (function of listFunciones; track $index) { @if (function.type ==
       'activacion') {
@@ -25,10 +26,16 @@
     </select>
   </div>
 
-  <label for="" class="text-white font-bold"
-    >3. Parametros de entrenamiento</label
-  >
-  <div class="block ml-4">
+  <label for="" class="text-white font-bold">Parametros de entrenamiento</label>
+  <div class="block ml-4 mb-5">
+    <div class="textInputWrapper">
+      <input
+        type="number"
+        min="1"
+        placeholder="Num de iteraciones"
+        class="textInput"
+      />
+    </div>
     <label class="text-white italic">Rata de aprendizaje: </label>
     <span class="text-white">{{form.value.learningRate}}</span>
     <input
@@ -42,13 +49,6 @@
       formControlName="learningRate"
     />
 
-    <input
-      type="number"
-      min="1"
-      placeholder="# de iteraciones"
-      formControlName="iterations"
-    />
-    <br />
     <label class="text-white italic">Error máximo permitido: </label>
     <span class="text-white">{{form.value.maxError}}</span>
     <input
@@ -62,5 +62,7 @@
       formControlName="maxError"
     />
   </div>
-  <button type="submit" class="bg-white">Entrenar</button>
+  <div class="flex justify-center items-center h-full">
+    <button type="submit" class="button">Entrenar</button>
+  </div>
 </form>

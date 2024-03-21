@@ -15,7 +15,12 @@ import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upl
   selector: "app-form-training",
   standalone: true,
   templateUrl: "./form-training.component.html",
-  styleUrls: ["../styles/slider.style.css"],
+  styleUrls: [
+    "../../styles/slider.style.css",
+    "../../styles/button.style.css",
+    "../../styles/input.style.css",
+    "../../styles/select.style.css",
+  ],
   imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
 export class FormTrainingComponent {
@@ -175,4 +180,7 @@ export class FormTrainingComponent {
     formControlName="banco"
     class="text-white my-2 ml-4"
     (change)="cargarArchivo($event)"
+
+
+     <button type="submit" class="bg-white">Entrenar</button>
   /> */
