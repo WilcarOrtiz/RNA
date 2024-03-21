@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, NgApexchartsModule } from 'ng-apexcharts';
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, NgApexchartsModule, ApexStroke, ApexFill } from 'ng-apexcharts';
 import { EntrenamientoService } from '../../service/training.service';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
+  stroke: ApexStroke;
+  fill: ApexFill;
 };
 @Component({
   selector: 'app-graph-error',
@@ -24,7 +26,7 @@ export class GraphErrorComponent {
     const dataError = this.datos.map((item: { error: any; }) => item.error);
     this.chartOptions.series = [
       {
-        name: 'My-series',
+        name: 'Error de iteración',
         data: dataError.map((item: any) => {
           if (typeof item === 'number') {
             return item;
@@ -35,7 +37,7 @@ export class GraphErrorComponent {
     ];
     this.chartOptions.chart = {
       height: 350,
-      type: 'line'
+      type: 'area'
     };
     this.chartOptions.title = {
       text: 'Error de Iteración vs Iteración'
@@ -43,6 +45,16 @@ export class GraphErrorComponent {
     this.chartOptions.xaxis = {
       categories: iteraciones
     };
+    this.chartOptions.stroke = {
+      curve: 'smooth',
+    };
+    this.chartOptions.fill = {
+      type: 'gradient',
+      gradient: {
+        opacityFrom: 0.6,
+        opacityTo: 0.8,
+      }
+    }
   }
   
 }

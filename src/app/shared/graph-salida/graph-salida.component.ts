@@ -34,11 +34,11 @@ export class GraphSalidaComponent implements OnInit{
       let numOutputs = this.data[0].yd.length;
       for (let i = 0; i < numOutputs; i++) {
         series.push({
-          name: `yd salida ${i + 1}`,
+          name: `Yd salida ${i + 1}`,
           data: this.data.map((item: { yd: any[]; }) => item.yd[i])
         });
         series.push({
-          name: `yr salida ${i + 1}`,
+          name: `Yr salida ${i + 1}`,
           data: this.data.map((item: { yr: any[]; }) => item.yr[i])
         });
       }
@@ -67,7 +67,6 @@ export class GraphSalidaComponent implements OnInit{
       dataLabels: {
         enabled: true
       },
-      
     };
 }
 
