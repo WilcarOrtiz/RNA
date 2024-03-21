@@ -7,7 +7,6 @@
     >
     </app-button-file-upload>
   </div>
-
   <label for="" class="text-white font-bold">Funciones</label>
   <div class="flex justify-between gap-4 mb-5 ml-3">
     <select name="" id="" formControlName="function1" class="select w-full">
@@ -30,16 +29,17 @@
   <div class="block ml-4 mb-5">
     <div class="textInputWrapper">
       <input
+        placeholder="Num de iteraciones"
         type="number"
         min="1"
-        placeholder="Num de iteraciones"
+        formControlName="iterations"
         class="textInput"
       />
     </div>
+
     <label class="text-white italic">Rata de aprendizaje: </label>
     <span class="text-white">{{form.value.learningRate}}</span>
     <input
-      id="myRange"
       class="slider"
       type="range"
       min="0"
@@ -49,10 +49,10 @@
       formControlName="learningRate"
     />
 
+    <br />
     <label class="text-white italic">Error máximo permitido: </label>
     <span class="text-white">{{form.value.maxError}}</span>
     <input
-      id="myRange"
       class="slider"
       type="range"
       min="0"

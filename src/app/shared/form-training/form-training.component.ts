@@ -20,6 +20,7 @@ import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upl
     "../../styles/button.style.css",
     "../../styles/input.style.css",
     "../../styles/select.style.css",
+    "../../styles/radio.style.css",
   ],
   imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
@@ -57,7 +58,7 @@ export class FormTrainingComponent {
       error: this.form.get("maxError")!.value,
       seleccionado: nuevoSeleccionado,
       pesosInicial: this.pesosInicial,
-      umbralInicial: this.umbralInicial
+      umbralInicial: this.umbralInicial,
     };
     this.cambioDatosNieto.emit(datos);
   }

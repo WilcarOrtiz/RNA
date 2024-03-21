@@ -1,19 +1,49 @@
-<div class="bg-black shadow w-72 fixed z-10 h-full overflow-auto px-3" style="transition: all 0.3s ease;border-right: 1px solid; border-image: linear-gradient(to bottom, #50cec9 0%, #167bdc 40%,#a164e8 100% ); border-image-slice: 1;">
-    <div class="px-6 py-4">
+<div
+  class="bg-black shadow w-72 fixed z-10 h-full overflow-auto px-3"
+  style="
+    transition: all 0.3s ease;
+    border-right: 1px solid;
+    border-image: linear-gradient(
+      to bottom,
+      #c609e8 0%,
+      #4978e6 40%,
+      #37eca6 100%
+    );
+    border-image-slice: 1;
+  "
+>
+  <div class="px-6 py-4"></div>
+
+  <nav>
+    <a
+      href="#"
+      class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Entrenamiento' ?'font-bold text-purple-200': 'text-gray-300 hover:bg-gray-800'}}"
+      (click)='seleccionado="Entrenamiento"'
+    >
+      <span class="mx-3">Entrenamiento</span>
+    </a>
+    <div
+      class="{{seleccionado === 'Simulacion'? 'desplegable': 'desplegable mostrar'}}"
+    >
+      <app-form-training
+        (cambioDatosNieto)="cambiarDatos($event)"
+      ></app-form-training>
     </div>
-    
-    <nav>
-      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Entrenamiento' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)='seleccionado="Entrenamiento"'>
-        <span class="mx-3">Entrenamiento</span>
-      </a>
-      <div class="{{seleccionado === 'Simulacion'? 'desplegable': 'desplegable mostrar'}}">
-        <app-form-training (cambioDatosNieto)="cambiarDatos($event)"></app-form-training>
+    <a
+      [attr.disabled]="entrenado"
+      href="#"
+      class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulacion' ?'font-bold text-purple-200': 'text-gray-300 hover:bg-gray-800'}}"
+      (click)="handleClick()"
+    >
+      <span class="mx-3">Simulación</span>
+    </a>
+    <div
+      class="{{seleccionado === 'Simulacion'? 'desplegable mostrar' : 'desplegable'}}"
+    >
+      <app-form-simulation
+        activacion="{{activacion}}"
+        (cambioSele)="cambiarSele()"
+      ></app-form-simulation>
     </div>
-      <a [attr.disabled]="entrenado" href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulacion' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)="handleClick()">
-        <span class="mx-3">Simulación</span>
-      </a>
-      <div class="{{seleccionado === 'Simulacion'? 'desplegable mostrar' : 'desplegable'}}">
-        <app-form-simulation activacion="{{activacion}}" (cambioSele)="cambiarSele()"></app-form-simulation>
-    </div>
-    </nav>
-  </div>
+  </nav>
+</div>

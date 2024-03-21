@@ -1,40 +1,68 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <label for="" class="text-white">1. Carga tu banco de datos</label>
-  <input
-    type="file"
-    formControlName="banco"
-    (change)="cargarArchivo($event, 'banco')"
-  />
-
-  <label for="" class="text-white">2. Carga pesos y umbrales finales</label>
-  <input
-    type="file"
-    formControlName="pesosumbrales"
-    (change)="cargarArchivo($event, 'pesosumbrales')"
-  />
-  <label for="" class="text-white">3. Patrones a simular</label>
-  <div>
-    <label for="" class="text-white">Banco de datos</label>
-    <input
-      type="radio"
-      formControlName="patron"
-      name="Spatron"
-      value="bancoDatos"
-    />
-    <label for="" class="text-white">Nuevo patrón</label>
-    <input
-      type="radio"
-      formControlName="patron"
-      name="Spatron"
-      value="patronN"
-    />
+  <label for="" class="text-white font-bold">Carga tu banco de datos</label>
+  <div class="flex justify-center items-center h-full mb-5">
+    <app-button-file-upload
+      texto="  Banco de simulacion"
+      type="file"
+      formControlName="banco"
+      (change)="cargarArchivo($event, 'banco')"
+    >
+    </app-button-file-upload>
   </div>
-  @if (form.get('patron')!.value != 'bancoDatos') {
-  <input type="text" formControlName="patron" />
-  }
-  <button type="submit" class="bg-white">Simular</button>
+  <label for="" class="text-white font-bold"
+    >Carga pesos y umbrales optimos</label
+  >
+  <div class="flex justify-center items-center h-full mb-5">
+    <app-button-file-upload
+      texto="  Pesos y umbrales"
+      type="file"
+      formControlName="pesosumbrales"
+      (change)="cargarArchivo($event, 'pesosumbrales')"
+    >
+    </app-button-file-upload>
+  </div>
 
-  <div class="flex justify-center items-center h-full">
-    <button type="submit" class="button">Entrenar</button>
+  <label for="" class="text-white font-semibold">Patrones a simular</label>
+  <div class="radio-button-container flex ml-3 mr-3">
+    <div class="radio-button">
+      <input
+        type="radio"
+        formControlName="patron"
+        name="Spatron"
+        value="patronN"
+        class="radio-button__input"
+        id="radio2"
+      />
+      <label class="radio-button__label" for="radio2">
+        <span class="radio-button__custom"></span>
+        Nuevo Patron
+      </label>
+    </div>
+    <div class="radio-button">
+      <input
+        type="radio"
+        formControlName="patron"
+        name="Spatron"
+        value="bancoDatos"
+        class="radio-button__input"
+        id="radio3"
+      />
+      <label class="radio-button__label" for="radio3">
+        <span class="radio-button__custom"></span>
+        Banco de datos
+      </label>
+    </div>
+  </div>
+
+  @if (form.get('patron')!.value != 'bancoDatos') {
+
+  <div class="textInputWrapper mb-5">
+    <input type="text" formControlName="patron" class="textInput" />
+  </div>
+
+  }
+
+  <div class="flex justify-center items-center h-full mt-5">
+    <button type="submit" class="button">Simular</button>
   </div>
 </form>

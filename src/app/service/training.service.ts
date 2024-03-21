@@ -46,7 +46,7 @@ export class EntrenamientoService {
     Nsalida: number,
     CodActivacion: string,
     CodAlgoEntrenamiento: string
-  ) {    
+  ) {
     this.NSalidas = Nsalida;
     this.pesos = pesosEntrante;
     this.umbral = umbralEntrante;
@@ -56,7 +56,7 @@ export class EntrenamientoService {
     this.SD = resultado.SD;
     this.Resultado = resultado.Result;
     this.CodAlgoEntrenamiento = CodAlgoEntrenamiento;
-    
+
     let iteracionActual = 0;
     let errorIteracion = 0;
 
