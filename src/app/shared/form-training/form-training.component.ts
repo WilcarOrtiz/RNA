@@ -9,12 +9,14 @@ import { FunctionsService } from "../../func/functions.service";
 import { ExcelService } from "../../service/excel.service";
 import { ParameterizationInitialService } from "../../service/parameterization-initial.service";
 import { EntrenamientoService } from "../../service/training.service";
+import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upload.component";
 
 @Component({
   selector: "app-form-training",
   standalone: true,
-  imports: [ReactiveFormsModule],
   templateUrl: "./form-training.component.html",
+  styleUrls: ["../styles/slider.style.css"],
+  imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
 export class FormTrainingComponent {
   listFunciones: any[];
@@ -44,11 +46,11 @@ export class FormTrainingComponent {
       patrones: this.patrones,
       pesos: this.pesos,
       umbral: this.umbral,
-      activacion: this.form.get('function2')!.value,
-      rata: this.form.get('learningRate')!.value,
-      iteraciones: this.form.get('iterations')!.value,
-      error: this.form.get('maxError')!.value,
-      seleccionado: nuevoSeleccionado
+      activacion: this.form.get("function2")!.value,
+      rata: this.form.get("learningRate")!.value,
+      iteraciones: this.form.get("iterations")!.value,
+      error: this.form.get("maxError")!.value,
+      seleccionado: nuevoSeleccionado,
     };
     console.log(datos);
     this.cambioDatosNieto.emit(datos);
@@ -56,8 +58,8 @@ export class FormTrainingComponent {
   //Funcion que valida que todos los campos del form esten llenos
 
   cargarArchivo(event: any) {
-    console.log(event)
-    console.log(this.form.get("banco")?.value)
+    console.log(event);
+    console.log(this.form.get("banco")?.value);
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
       this.form.get("banco")?.setValue(archivo);
@@ -167,3 +169,10 @@ export class FormTrainingComponent {
     this.listFunciones = this.funciones.listFunction;
   }
 }
+
+/* <input
+    type="file"
+    formControlName="banco"
+    class="text-white my-2 ml-4"
+    (change)="cargarArchivo($event)"
+  /> */
