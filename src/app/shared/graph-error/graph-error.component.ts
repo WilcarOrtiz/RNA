@@ -14,11 +14,7 @@ export type ChartOptions = {
   templateUrl: 'graph-error.component.html',
 })
 export class GraphErrorComponent {
-
   datos!: any;
-  
-
-
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> = {}; // Inicialización aquí
 
@@ -42,7 +38,7 @@ export class GraphErrorComponent {
       type: 'line'
     };
     this.chartOptions.title = {
-      text: 'Error de Iteración'
+      text: 'Error de Iteración vs Iteración'
     };
     this.chartOptions.xaxis = {
       categories: iteraciones

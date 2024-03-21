@@ -37,6 +37,9 @@ export class FormTrainingComponent {
       patrones: this.patrones,
       pesos: this.pesos,
       umbral: this.umbral,
+      rata: this.form.get('learningRate')!.value,
+      iteraciones: this.form.get('iterations')!.value,
+      error: this.form.get('maxError')!.value,
       seleccionado: nuevoSeleccionado
     };
     console.log(datos)

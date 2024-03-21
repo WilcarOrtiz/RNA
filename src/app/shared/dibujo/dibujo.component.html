@@ -1,14 +1,14 @@
 <ngx-graph
   class="chart-container container flex items-center justify-center"
-  [style.width.%]="100"
-  [style.height.%]="90"
+  [style.width.%]="90"
+  [style.height.%]="70"
   [links]="links"
   [autoCenter]="true"
   [nodes]="nodos"
   [layoutSettings]="{
     orientation: 'LR',
-    marginX: 0,
-    marginY: 80,
+    marginX: 110,
+    marginY: 125,
     spacing: 0
   }"
 >
@@ -71,10 +71,10 @@
 
 <div class="flex ml-24 mt-1 justify-between w-3/5">
   <p class="font-bold" style="color: #2cd4c5">
-    <span style="font-size: 1.2em">E</span>: entrada
+    <span style="font-size: 1.2em">E</span>: Entrada
   </p>
-  <p style="color: #05d5f9"><span style="font-size: 1.2em">N</span>: neurona</p>
+  <p style="color: #05d5f9"><span style="font-size: 1.2em">N</span>: Neurona</p>
   <p style="color: #06308e">
-    <span style="font-size: 1.2em">S</span>: salida de la red
+    <span style="font-size: 1.2em">S</span>: Salida
   </p>
 </div>

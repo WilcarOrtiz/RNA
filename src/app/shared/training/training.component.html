@@ -1,9 +1,32 @@
-<div>
-    <h1 class="text-white">ENTRENAMIENTO</h1>
-    <h2 class="text-white">Parametros de entrada</h2>
-    <h3 class="text-white">N de entradas: {{datos.entradas}}</h3>
-    <h3 class="text-white">N de salidas: {{datos.salidas}}</h3>
-    <h3 class="text-white">N de patrones: {{datos.patrones}}</h3>
-    <app-dibujo [NumEntradas]="datos.entradas" [NumNeuronas]="datos.salidas"></app-dibujo>
-    <app-graph-error></app-graph-error>
+<div> 
+    <h1 class="text-white text-center font-bold">ENTRENAMIENTO</h1>
+    <div class="grid grid-cols-3 gap-x-4 px-7 text-center mt-4">
+        <div class="text-left param">
+            <h2 class="text-white font-bold">Parametros de entrada</h2>
+            <h3 class="text-white">N de entradas: {{datos.entradas}}</h3>
+            <h3 class="text-white">N de salidas: {{datos.salidas}}</h3>
+            <h3 class="text-white">N de patrones: {{datos.patrones}}</h3>
+        </div>
+        <div class="text-center param">
+            <h2 class="text-white font-bold">Parametros de entrenamiento</h2>
+            <h3 class="text-white">Rata de aprendizaje: {{datos.rata}}</h3>
+            <h3 class="text-white"># de iteraciones: {{datos.iteraciones}}</h3>
+            <h3 class="text-white">Error máximo permitido: {{datos.error}}</h3>
+        </div>
+        <div class="text-right param">
+            <h2 class="text-white font-bold">Pesos y umbrales iniciales</h2>
+            <h3 class="text-white">Rata de aprendizaje: {{datos.rata}}</h3>
+            <h3 class="text-white"># de iteraciones: {{datos.iteraciones}}</h3>
+            <h3 class="text-white">Error máximo permitido: {{datos.error}}</h3>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-x-4 mt-8" >
+        <div>
+            <app-dibujo [NumEntradas]="datos.entradas" [NumNeuronas]="datos.salidas"></app-dibujo>
+        </div>
+        <div>
+            <app-graph-error></app-graph-error>
+        </div>
+    </div>
 </div>
+

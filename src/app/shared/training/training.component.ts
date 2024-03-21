@@ -7,6 +7,7 @@ import { GraphErrorComponent } from '../graph-error/graph-error.component';
   selector: 'app-training',
   standalone: true,
   imports: [ DibujoComponent, NgApexchartsModule, GraphErrorComponent],
+  styleUrl: 'training.component.css',
   templateUrl: './training.component.html'
 })
 export class TrainingComponent {
