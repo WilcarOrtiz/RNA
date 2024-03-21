@@ -109,7 +109,7 @@ console.log("codActivacion:", codActivacion);
       suma = suma - umbral[j];
       let val = funcionMatematicas.executeFunction(codActivacion, suma);
       console.log(val)
-      YRi.push(parseFloat(val.toFixed(2)));
+      YRi.push(parseFloat(val));
     }
     return YRi;
   }
