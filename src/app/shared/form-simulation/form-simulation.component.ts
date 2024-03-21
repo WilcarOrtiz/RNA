@@ -1,10 +1,13 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { SimulationService } from "../../service/simulation.service";
+import { ExcelService } from "../../service/excel.service";
+import { ParameterizationInitialService } from "../../service/parameterization-initial.service";
 
 @Component({
   selector: "app-form-simulation",
@@ -14,35 +17,128 @@ import {
   styleUrl: "./form-simulation.component.css",
 })
 export class FormSimulationComponent {
+  pesos: any;
+  umbral: any;
+  Data: any;
+  entradas: any;
+  salidas: any;
+  arrayEntrada: number[] = [];
+  arraySalida: number[] = [];
+  @Input() activacion = "";
   form = new FormGroup({
     banco: new FormControl(""),
     pesosumbrales: new FormControl(""),
+    patron: new FormControl("bancoDatos"),
   });
 
+
+  division(){
+    if (this.form.get('patron')!.value != 'bancoDatos') {
+      let data = this.form.get('patron')!.value
+      let partes = data!.split(':');
+      let nEntradas= partes[0].split(','); 
+      let nSalidas = partes[1].split(','); 
+      console.log('nEntradas.length:', nEntradas.length);
+      console.log('this.entradas:', this.entradas);
+      console.log('nSalidas.length:', nSalidas.length);
+      console.log('this.salidas:', this.salidas);
+      if (nEntradas.length == this.entradas && nSalidas.length == this.salidas) {
+        console.log('TUUUUUUUUU-................')
+        this.arrayEntrada = nEntradas.map(Number); 
+        this.arraySalida = nSalidas.map(Number); 
+      } else {
+        alert('No concuerda la cantidad de entradas y/o salidas a las del banco de datos. ❌')
+      }
+    } 
+  }
+  
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.division();
+      this.leerPesosUmbrales(this.form.get("pesosumbrales")!.value).then(() => {
+        this.leerExcel(this.form.get("banco")!.value).then(() => {
+          console.log(this.entradas)
+          this.simulacion();
+          console.log(this.simulation.YD_YR);
+        });
+      });
     } else {
       alert("Por favor, llena todos los campos del formulario.");
     }
   }
+  
+  
 
-  /*  simulacion(
-    isInput: boolean, // true cuando es patron , falso cuando es un conjunto de patrones
-    Data: Array<Array<number>>, // es la que te da la funcion readExcelBD (osea lo mismo del entrenamiento)
-    inputInfoPatronEntrada: Array<number>, // informacion del input de patron de entrada en forma de vector
-    inputInfoPatronSalida: Array<number>, // informacion del input de patron de salida en forma de vector
-    pesosEntrante: Array<Array<number>>, es la informacion que obtienes al ejecutar la funcion readExcelPesosUmbrales
-    umbralEntrante: Array<number>, es la informacion que obtienes al ejecutar la funcion readExcelPesosUmbrales
-    Nentrada: number,
-    Nsalida: number,
-    codActivacion: string  //codigo de la funcion el del select (solo muestras el selec de las funcuones de activacion)
-  ):
+  cargarArchivo(event: any, param: string) {
+    console.log(event)
+    console.log(this.form.get(param)?.value)
+    if (event.target.files && event.target.files.length) {
+      const archivo = event.target.files[0];
+      this.form.get(param)?.setValue(archivo);
+      console.log(this.form.get(param)?.value)
+    }
+    
+  }
 
-   ESTO TE VA A DEVOLVER UN RETORNA UN ARRAY DE OBJETOS
-        yd: Un array que contiene la salida deseada de la red neuronal para un patrón de entrada.
-        yr: Un array que contiene la salida real de la red neuronal para un patrón de entrada.
+  leerPesosUmbrales(event: any) {
+    return new Promise<void>((resolve, reject) => {
+      this.excelService
+        .readExcelPesosUmbrales(event)
+        .then((data) => {
+          this.pesos = data.pesos;
+          this.umbral = data.umbral[0];
+          resolve();
+        })
+        .catch((error) => {
+          console.error("Error al leer el archivo:", error);
+          reject(error);
+        });
+    });
+  }
+  
 
-        es asi debido a que aja la salida son vectoriales 
-  */
+  leerExcel(event: any) {
+    return new Promise<void>((resolve, reject) => {
+      this.excelService
+        .readExcelBD(event)
+        .then((e) => {
+          this.Data = e;
+          console.log(this.Data);
+          let resultado = this.parameterizationInitialService.NumberSaEnPa(
+            this.Data
+          );
+          if (resultado) {
+            this.entradas = resultado.NumEntrada;
+            this.salidas = resultado.NumSalida;
+            resolve();
+          } else {
+            reject("No se cargaron los patrones de entrada");
+          }
+        })
+        .catch((error) => {
+          reject(error); // Manejamos el error de la lectura del archivo
+        });
+    });
+  }
+
+  simulacion() {
+    this.simulation.simulacion(
+      this.form.get("patron")?.value == 'bancoDatos' ? false : true, // true cuando es patron , falso cuando es un conjunto de patrones
+      this.Data, // es la que te da la funcion readExcelBD (osea lo mismo del entrenamiento)
+      this.arrayEntrada, // informacion del input de patron de entrada en forma de vector
+      this.arraySalida, // informacion del input de patron de salida en forma de vector
+      this.pesos,
+      this.umbral,
+      this.entradas,
+      this.salidas,
+      this.activacion //codigo de la funcion el del select (solo muestras el selec de las funcuones de activacion)
+    );
+  }
+
+  constructor(private simulation: SimulationService, private excelService: ExcelService, private parameterizationInitialService: ParameterizationInitialService){
+
+  }
+
+
+
 }

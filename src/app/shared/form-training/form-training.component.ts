@@ -44,6 +44,7 @@ export class FormTrainingComponent {
       patrones: this.patrones,
       pesos: this.pesos,
       umbral: this.umbral,
+      activacion: this.form.get('function2')!.value,
       rata: this.form.get('learningRate')!.value,
       iteraciones: this.form.get('iterations')!.value,
       error: this.form.get('maxError')!.value,
@@ -55,6 +56,8 @@ export class FormTrainingComponent {
   //Funcion que valida que todos los campos del form esten llenos
 
   cargarArchivo(event: any) {
+    console.log(event)
+    console.log(this.form.get("banco")?.value)
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
       this.form.get("banco")?.setValue(archivo);

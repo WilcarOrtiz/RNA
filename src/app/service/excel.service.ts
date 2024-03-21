@@ -34,9 +34,8 @@ export class ExcelService {
     XLSX.writeFile(wb, filePath);
   }
 
-  readExcelPesosUmbrales(event: any): Promise<{ pesos: any; umbral: any }> {
+  readExcelPesosUmbrales(archivo: File): Promise<{ pesos: any; umbral: any }> {
     return new Promise((resolve, reject) => {
-      const archivo = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
         const data = new Uint8Array(e.target.result);
@@ -46,13 +45,14 @@ export class ExcelService {
         const umbralData = XLSX.utils.sheet_to_json(umbralSheet, { header: 1 });
         resolve({ pesos: pesosData, umbral: umbralData });
       };
-
+  
       reader.onerror = (error) => {
         reject(error);
       };
       reader.readAsArrayBuffer(archivo);
     });
   }
+  
 
   readExcelBD(file: File): Promise<any[]> {
     let data: any;

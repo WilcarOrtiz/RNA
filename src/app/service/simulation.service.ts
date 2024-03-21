@@ -38,9 +38,20 @@ export class SimulationService {
     Nsalida: number,
     codActivacion: string //codigo de la funcion
   ): YD_YR[] {
+    console.log("isInput:", isInput);
+console.log("Data:", Data);
+console.log("inputInfoPatronEntrada:", inputInfoPatronEntrada);
+console.log("inputInfoPatronSalida:", inputInfoPatronSalida);
+console.log("pesosEntrante:", pesosEntrante);
+console.log("umbralEntrante:", umbralEntrante);
+console.log("Nentrada:", Nentrada);
+console.log("Nsalida:", Nsalida);
+console.log("codActivacion:", codActivacion);
+
     this.NSalidas = Nsalida;
     this.pesos = pesosEntrante;
     let resultado = this.parametrizacion.GetPESDR(Data, Nentrada, Nsalida);
+    console.log(resultado)
     this.PE = resultado.PE; //patron
     this.SD = resultado.SD; // salida deseada
     this.Resultado = resultado.Result; // en caso de tener resultado especifico
@@ -89,13 +100,15 @@ export class SimulationService {
     codActivacion: string
   ) {
     const YRi = [];
+    let suma = 0;
     for (let j = 0; j < umbral.length; j++) {
-      let suma = 0;
+      suma = 0;
       for (let x = 0; x < patron.length; x++) {
         suma = suma + patron[x] * pesos[x][j];
       }
       suma = suma - umbral[j];
       let val = funcionMatematicas.executeFunction(codActivacion, suma);
+      console.log(val)
       YRi.push(parseFloat(val.toFixed(2)));
     }
     return YRi;

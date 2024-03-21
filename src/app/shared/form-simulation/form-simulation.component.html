@@ -1,7 +1,18 @@
 <form [formGroup]="form" (submit)="onSubmit()">
     <label for="" class="text-white">1. Carga tu banco de datos</label>
-    <input type="file" formControlName='banco'>
+    <input type="file" formControlName='banco' (change)="cargarArchivo($event, 'banco')">
+
     <label for="" class="text-white">2. Carga pesos y umbrales finales</label>
-    <input type="file" formControlName='pesosumbrales'>
+    <input type="file" formControlName='pesosumbrales' (change)="cargarArchivo($event, 'pesosumbrales')">
+    <label for="" class="text-white">3. Patrones a simular</label>
+    <div>
+        <label for="" class="text-white">Banco de datos</label>
+        <input type="radio" formControlName='patron' name="Spatron" value="bancoDatos">
+        <label for="" class="text-white" >Nuevo patrón</label>
+        <input type="radio" formControlName='patron' name="Spatron" value="patronN">
+    </div>
+    @if (form.get('patron')!.value != 'bancoDatos') {
+        <input type="text"  formControlName='patron'>
+    }
     <button type="submit" class="bg-white">Simular</button>
 </form>

@@ -65,6 +65,8 @@ export class FunctionsService {
   }
 
   executeFunction(code: string, ...args: any[]): any {
+    console.log(code)
+    console.log(args)
     const foundFunction = this.listFunction.find(
       (funcion) => funcion.code === code
     );

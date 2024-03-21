@@ -17,7 +17,7 @@ export class EntrenamientoService {
     private funcionBase: ExcelService,
     private parametrizacion: ParameterizationInitialService
   ) {}
-
+  entrenado = false;
   pesos: number[][] = [];
   umbral: number[] = [];
   NSalidas: number = 0; //numero de salidas
@@ -69,7 +69,7 @@ export class EntrenamientoService {
     this.SD = resultado.SD;
     this.Resultado = resultado.Result;
     this.CodAlgoEntrenamiento = CodAlgoEntrenamiento;
-
+    
     let iteracionActual = 0;
     let errorIteracion = 0;
 
@@ -115,6 +115,7 @@ export class EntrenamientoService {
       });
       if (errorIteracion <= ErrorMaximoPermitido) {
         this.funcionBase.SaveExcelPesosUmbrales(this.pesos, this.umbral);
+        this.entrenado = true;
         break;
       }
     }

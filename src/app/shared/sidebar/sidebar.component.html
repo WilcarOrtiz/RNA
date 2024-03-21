@@ -10,11 +10,11 @@
       <div class="{{seleccionado === 'Simulación'? 'desplegable': 'desplegable mostrar'}}">
         <app-form-training (cambioDatosNieto)="cambiarDatos($event)"></app-form-training>
     </div>
-      <a href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulación' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)='seleccionado="Simulación"'>
+      <a [attr.disabled]="entrenado" href="#" class="opcion flex items-center px-6 py-2 mb-1 {{seleccionado === 'Simulación' ?'font-bold text-color1': 'text-gray-300 hover:bg-gray-800'}}" (click)="handleClick()">
         <span class="mx-3">Simulación</span>
       </a>
       <div class="{{seleccionado === 'Simulación'? 'desplegable mostrar' : 'desplegable'}}">
-        <app-form-simulation></app-form-simulation>
+        <app-form-simulation activacion="{{activacion}}"></app-form-simulation>
     </div>
     </nav>
   </div>
