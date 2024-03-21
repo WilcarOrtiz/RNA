@@ -25,6 +25,7 @@ import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upl
   imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
 export class FormTrainingComponent {
+  selectedFileName: string | undefined = "BD entrenamiento";
   listFunciones: any[];
   pesosInicial: number[][] = [];
   umbralInicial: Array<number> = [];
@@ -67,6 +68,7 @@ export class FormTrainingComponent {
   cargarArchivo(event: any) {
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
+      this.selectedFileName = archivo.name;
       this.form.get("banco")?.setValue(archivo);
     }
   }

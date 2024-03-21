@@ -35,7 +35,7 @@ export class FormSimulationComponent {
   @Output() cambioSele = new EventEmitter<any>();
 
   cambiarSele() {
-    this.cambioSele.emit('Simulacion');
+    this.cambioSele.emit("Simulacion");
   }
 
   form = new FormGroup({
@@ -44,16 +44,18 @@ export class FormSimulationComponent {
     patron: new FormControl("bancoDatos"),
   });
 
-
-  division(){
-    if (this.form.get('patron')!.value != 'bancoDatos') {
-      let data = this.form.get('patron')!.value
-      let partes = data!.split(':');
-      let nEntradas= partes[0].split(','); 
-      let nSalidas = partes[1].split(',');
-      if (nEntradas.length == this.entradas && nSalidas.length == this.salidas) {
-        this.arrayEntrada = nEntradas.map(Number); 
-        this.arraySalida = nSalidas.map(Number); 
+  division() {
+    if (this.form.get("patron")!.value != "bancoDatos") {
+      let data = this.form.get("patron")!.value;
+      let partes = data!.split(":");
+      let nEntradas = partes[0].split(",");
+      let nSalidas = partes[1].split(",");
+      if (
+        nEntradas.length == this.entradas &&
+        nSalidas.length == this.salidas
+      ) {
+        this.arrayEntrada = nEntradas.map(Number);
+        this.arraySalida = nSalidas.map(Number);
       } else {
         alert(
           "No concuerda la cantidad de entradas y/o salidas a las del banco de datos. ❌"
@@ -69,7 +71,7 @@ export class FormSimulationComponent {
         this.leerExcel(this.form.get("banco")!.value).then(() => {
           this.simulacion();
           console.log(this.simulation.YD_YR);
-          this.cambiarSele()
+          this.cambiarSele();
         });
       });
     } else {
@@ -80,6 +82,7 @@ export class FormSimulationComponent {
   cargarArchivo(event: any, param: string) {
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
+
       this.form.get(param)?.setValue(archivo);
     }
   }
