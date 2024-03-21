@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { FunctionsService } from "../func/functions.service";
-import { ExcelService } from "./excel.service";
 import { ParameterizationInitialService } from "./parameterization-initial.service";
 
 export interface YD_YR {
@@ -26,7 +25,6 @@ export class SimulationService {
     private funcionMatematicas: FunctionsService,
     private parametrizacion: ParameterizationInitialService
   ) {}
-
   simulacion(
     isInput: boolean, // true cuando es patron falso cuando es un conjunto de patrones
     Data: Array<Array<number>>,
@@ -38,20 +36,9 @@ export class SimulationService {
     Nsalida: number,
     codActivacion: string //codigo de la funcion
   ): YD_YR[] {
-    console.log("isInput:", isInput);
-console.log("Data:", Data);
-console.log("inputInfoPatronEntrada:", inputInfoPatronEntrada);
-console.log("inputInfoPatronSalida:", inputInfoPatronSalida);
-console.log("pesosEntrante:", pesosEntrante);
-console.log("umbralEntrante:", umbralEntrante);
-console.log("Nentrada:", Nentrada);
-console.log("Nsalida:", Nsalida);
-console.log("codActivacion:", codActivacion);
-
     this.NSalidas = Nsalida;
     this.pesos = pesosEntrante;
     let resultado = this.parametrizacion.GetPESDR(Data, Nentrada, Nsalida);
-    console.log(resultado)
     this.PE = resultado.PE; //patron
     this.SD = resultado.SD; // salida deseada
     this.Resultado = resultado.Result; // en caso de tener resultado especifico
@@ -89,6 +76,9 @@ console.log("codActivacion:", codActivacion);
         });
       }
     }
+    for (let i = 0; i < this.PE.length; i++) {
+      console.log(this.PE[i], ": deseada ", this.SD[i], " Red: ", this.YRi[i]);
+    } 
     return this.YD_YR;
   }
 
@@ -108,7 +98,6 @@ console.log("codActivacion:", codActivacion);
       }
       suma = suma - umbral[j];
       let val = funcionMatematicas.executeFunction(codActivacion, suma);
-      console.log(val)
       YRi.push(parseFloat(val));
     }
     return YRi;

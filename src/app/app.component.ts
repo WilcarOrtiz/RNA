@@ -26,9 +26,12 @@ import { SimulationComponent } from "./shared/simulation/simulation.component";
 export class AppComponent {
   seleccionado = ''
   datos = ''
+  
   recibirDatos(param: any) {
-    console.log(param)
     this.datos = param;
-    this.seleccionado = param.seleccionado
+    this.seleccionado = param.seleccionado ? param.seleccionado : param
+  }
+  recibirCambio(param: any) {
+    this.seleccionado = param;
   }
 }

@@ -15,15 +15,19 @@ export class SidebarComponent {
   entrenado!: boolean;
   activacion: any;
   @Output() seleccionadoChange = new EventEmitter<string>();
-  
+  @Output() seleccionadoSide = new EventEmitter<string>();
   cambiarDatos(param: any) {
     this.seleccionadoChange.emit(param);
     this.activacion = param.activacion
   }
+  cambiarSele(){
+    this.seleccionadoSide.emit('Simulacion');
+  }
 
   handleClick() {
+    this.seleccionado = "Simulacion";
     // if (this.entrenado) {
-      this.seleccionado = "Simulación";
+      
     // } else {
     //   alert('El entrenamiento no fue exitoso, intentalo nuevamente para realizar la simulación. 😁');
     // }

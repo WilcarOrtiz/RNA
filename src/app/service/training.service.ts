@@ -46,20 +46,7 @@ export class EntrenamientoService {
     Nsalida: number,
     CodActivacion: string,
     CodAlgoEntrenamiento: string
-  ) {
-    console.log({
-      Data: Data,
-      pesosEntrante: pesosEntrante,
-      umbralEntrante: umbralEntrante,
-      NumIteracionesMaxima: NumIteracionesMaxima,
-      RataAprendizaje: RataAprendizaje,
-      ErrorMaximoPermitido: ErrorMaximoPermitido,
-      Nentrada: Nentrada,
-      Nsalida: Nsalida,
-      CodActivacion: CodActivacion,
-      CodAlgoEntrenamiento: CodAlgoEntrenamiento
-    });
-    
+  ) {    
     this.NSalidas = Nsalida;
     this.pesos = pesosEntrante;
     this.umbral = umbralEntrante;

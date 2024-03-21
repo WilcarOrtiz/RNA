@@ -50,14 +50,11 @@ export class FormTrainingComponent {
       error: this.form.get('maxError')!.value,
       seleccionado: nuevoSeleccionado
     };
-    console.log(datos);
     this.cambioDatosNieto.emit(datos);
   }
   //Funcion que valida que todos los campos del form esten llenos
 
   cargarArchivo(event: any) {
-    console.log(event)
-    console.log(this.form.get("banco")?.value)
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
       this.form.get("banco")?.setValue(archivo);
@@ -78,7 +75,6 @@ export class FormTrainingComponent {
         .readExcelBD(event)
         .then((e) => {
           this.Data = e;
-          console.log(this.Data);
           let resultado = this.parameterizationInitialService.NumberSaEnPa(
             this.Data
           );
@@ -125,13 +121,6 @@ export class FormTrainingComponent {
             : "" // codigo del algoritmo de entrenamiento
         );
         this.cambiarDatos("Entrenamiento");
-        /*
-        console.log(
-          "Para ver si se mantiene Peso inicial: ",
-          this.pesosInicial,
-          " Umbral inicial:  ",
-          this.umbralInicial
-        ); */
       })
       .catch((error) => {
         console.error("Error al leer el archivo:", error);
@@ -143,18 +132,10 @@ export class FormTrainingComponent {
       this.entradas,
       this.salidas
     );
-    // console.log(resultado);
     this.pesos = resultado.pesos;
     this.umbral = resultado.umbral;
     this.pesosInicial = resultado.pesos;
     this.umbralInicial = resultado.umbral;
-
-    /*    console.log(
-      "Pa ver los pesos inicial ",
-      this.pesos,
-      " Umbral   ",
-      this.umbral
-    ); */
   }
 
   //Constructor que trae la lista de las funciones de entramiento y activacion

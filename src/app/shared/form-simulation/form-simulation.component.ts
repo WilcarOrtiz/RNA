@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -25,6 +25,12 @@ export class FormSimulationComponent {
   arrayEntrada: number[] = [];
   arraySalida: number[] = [];
   @Input() activacion = "";
+  @Output() cambioSele = new EventEmitter<any>();
+
+  cambiarSele() {
+    this.cambioSele.emit('Simulacion');
+  }
+
   form = new FormGroup({
     banco: new FormControl(""),
     pesosumbrales: new FormControl(""),
@@ -37,13 +43,8 @@ export class FormSimulationComponent {
       let data = this.form.get('patron')!.value
       let partes = data!.split(':');
       let nEntradas= partes[0].split(','); 
-      let nSalidas = partes[1].split(','); 
-      console.log('nEntradas.length:', nEntradas.length);
-      console.log('this.entradas:', this.entradas);
-      console.log('nSalidas.length:', nSalidas.length);
-      console.log('this.salidas:', this.salidas);
+      let nSalidas = partes[1].split(',');
       if (nEntradas.length == this.entradas && nSalidas.length == this.salidas) {
-        console.log('TUUUUUUUUU-................')
         this.arrayEntrada = nEntradas.map(Number); 
         this.arraySalida = nSalidas.map(Number); 
       } else {
@@ -57,9 +58,9 @@ export class FormSimulationComponent {
       this.division();
       this.leerPesosUmbrales(this.form.get("pesosumbrales")!.value).then(() => {
         this.leerExcel(this.form.get("banco")!.value).then(() => {
-          console.log(this.entradas)
           this.simulacion();
           console.log(this.simulation.YD_YR);
+          this.cambiarSele()
         });
       });
     } else {
@@ -70,14 +71,10 @@ export class FormSimulationComponent {
   
 
   cargarArchivo(event: any, param: string) {
-    console.log(event)
-    console.log(this.form.get(param)?.value)
     if (event.target.files && event.target.files.length) {
       const archivo = event.target.files[0];
       this.form.get(param)?.setValue(archivo);
-      console.log(this.form.get(param)?.value)
     }
-    
   }
 
   leerPesosUmbrales(event: any) {
@@ -103,7 +100,6 @@ export class FormSimulationComponent {
         .readExcelBD(event)
         .then((e) => {
           this.Data = e;
-          console.log(this.Data);
           let resultado = this.parameterizationInitialService.NumberSaEnPa(
             this.Data
           );

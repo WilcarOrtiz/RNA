@@ -2,13 +2,13 @@
 <div class="flex h-screen bg-black">
   <!-- Sidebar / Drawer -->
   <app-sidebar
-    (seleccionadoChange)="recibirDatos($event)"
+    (seleccionadoChange)="recibirDatos($event)" (seleccionadoSide)="recibirCambio($event)"
   ></app-sidebar>
   <!-- Content -->
   <div class="ml-72 p-6 w-full">
     @if (seleccionado == 'Entrenamiento') {
     <app-training [datos]="datos"></app-training>
-    } @else if(seleccionado == 'Simulación'){
+    } @else if(seleccionado == 'Simulacion'){
     <app-simulation></app-simulation>
     } @else {
       <div class="text-start">

@@ -35,9 +35,7 @@ export class DibujoComponent {
   links: links[] = [];
 
   ngOnInit() {
-    console.log(this.NumEntradas)
     this.dibujar();
-    
   }
 
   dibujar() {
