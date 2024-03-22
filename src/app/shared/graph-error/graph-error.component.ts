@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, NgApexchartsModule, ApexStroke, ApexFill } from 'ng-apexcharts';
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, NgApexchartsModule, ApexStroke, ApexFill, ApexMarkers, ApexOptions } from 'ng-apexcharts';
 import { EntrenamientoService } from '../../service/training.service';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
-  stroke: ApexStroke;
-  fill: ApexFill;
+
 };
 @Component({
   selector: 'app-graph-error',
@@ -45,16 +44,5 @@ export class GraphErrorComponent {
     this.chartOptions.xaxis = {
       categories: iteraciones
     };
-    this.chartOptions.stroke = {
-      curve: 'smooth',
-    };
-    this.chartOptions.fill = {
-      type: 'gradient',
-      gradient: {
-        opacityFrom: 0.6,
-        opacityTo: 0.8,
-      }
-    }
   }
-  
-}
+  }
