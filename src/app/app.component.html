@@ -2,19 +2,27 @@
 <div class="flex h-screen bg-black">
   <!-- Sidebar / Drawer -->
   <app-sidebar
-    (seleccionadoChange)="recibirDatos($event)" (seleccionadoSide)="recibirCambio($event)"
+    (seleccionadoChange)="recibirDatos($event)"
+    (seleccionadoSide)="recibirCambio($event)"
   ></app-sidebar>
   <!-- Content -->
-  <div class="ml-72 p-6 w-full bg-[url('./assets/fondo.jpg')]" style="background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div
+    class="ml-72 p-6 w-full"
+    style="
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    "
+  >
     @if (seleccionado == 'Entrenamiento') {
     <app-training [datos]="datos"></app-training>
     } @else if(seleccionado == 'Simulacion'){
     <app-simulation></app-simulation>
     } @else {
-      <div class="text-start">
-        <h1 class="text-3xl font-semibold text-gray-700">Bienvenido(a)</h1>
-        <p class="text-white">◀️ Entrena tu red neuronal.</p>
-      </div>
+    <div class="text-start">
+      <h1 class="text-3xl font-semibold text-gray-700">Bienvenido(a)</h1>
+      <p class="text-white">◀️ Entrena tu red neuronal.</p>
+    </div>
     }
   </div>
 </div>
