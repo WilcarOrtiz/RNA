@@ -16,6 +16,7 @@ export class SidebarComponent {
   activacion: any;
   @Output() seleccionadoChange = new EventEmitter<string>();
   @Output() seleccionadoSide = new EventEmitter<string>();
+
   cambiarDatos(param: any) {
     this.seleccionadoChange.emit(param);
     this.activacion = param.activacion
@@ -25,16 +26,16 @@ export class SidebarComponent {
   }
 
   handleClick() {
-    this.seleccionado = "Simulacion";
-    // if (this.entrenado) {
-      
-    // } else {
-    //   alert('El entrenamiento no fue exitoso, intentalo nuevamente para realizar la simulación. 😁');
-    // }
+    this.entrenado = this.entrenamiento.entrenado
+    if (this.entrenado) {
+      this.seleccionado = "Simulacion";
+    } else {
+      alert('El entrenamiento no fue exitoso, intentalo nuevamente para realizar la simulación. 😁');
+    }
   }
 
 
   constructor(private entrenamiento: EntrenamientoService){
-    this.entrenado = entrenamiento.entrenado
+    
   }
 }

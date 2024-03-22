@@ -47,7 +47,7 @@ export class GraphSalidaComponent implements OnInit{
       series: series,
       chart: {
         height: 350,
-        type: "line", 
+        type: "area", 
       },stroke: {
         curve: 'smooth',
       },

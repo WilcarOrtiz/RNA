@@ -101,8 +101,8 @@ export class EntrenamientoService {
         error: errorIteracion,
       });
       if (errorIteracion <= ErrorMaximoPermitido) {
-        this.funcionBase.SaveExcelPesosUmbrales(this.pesos, this.umbral);
         this.entrenado = true;
+        this.funcionBase.SaveExcelPesosUmbrales(this.pesos, this.umbral);
         break;
       }
     }

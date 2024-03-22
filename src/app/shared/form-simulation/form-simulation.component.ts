@@ -51,6 +51,10 @@ export class FormSimulationComponent {
       let partes = data!.split(":");
       let nEntradas = partes[0].split(",");
       let nSalidas = partes[1].split(",");
+      console.log(this.entradas)
+      console.log(this.salidas)
+      console.log(nEntradas.length)
+      console.log(nSalidas.length)
       if (
         nEntradas.length == this.entradas &&
         nSalidas.length == this.salidas
@@ -67,9 +71,10 @@ export class FormSimulationComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.division();
+      
       this.leerPesosUmbrales(this.form.get("pesosumbrales")!.value).then(() => {
         this.leerExcel(this.form.get("banco")!.value).then(() => {
+          this.division();
           this.simulacion();
           console.log(this.simulation.YD_YR);
           this.cambiarSele();
