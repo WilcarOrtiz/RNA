@@ -20,6 +20,7 @@ import { ButtonFileUploadComponent } from "../button-file-upload/button-file-upl
     "../../styles/button.style.css",
     "../../styles/input.style.css",
     "../../styles/select.style.css",
+    "../../styles/radio.style.css"
   ],
   imports: [ReactiveFormsModule, ButtonFileUploadComponent],
 })
@@ -72,6 +73,7 @@ export class FormSimulationComponent {
           this.simulacion();
           console.log(this.simulation.YD_YR);
           this.cambiarSele();
+          console.log("datos", this.Data);
         });
       });
     } else {

@@ -1,25 +1,25 @@
 <form [formGroup]="form" (submit)="onSubmit()">
-  <label for="" class="text-white font-bold">Carga tu banco de datos</label>
-  <div class="flex justify-center items-center h-full mb-2">
-    <app-button-file-upload
-      texto="  Banco de simulacion"
+  <div class="mb-5">
+    <label for="" class="text-white font-semibold"
+      >Carga tu banco de datos</label
+    >
+    <input
+      class="bg-green-300"
       type="file"
       formControlName="banco"
       (change)="cargarArchivo($event, 'banco')"
-    >
-    </app-button-file-upload>
+    />
   </div>
-  <label for="" class="text-white font-bold"
-    >Carga pesos y umbrales optimos</label
-  >
-  <div class="flex justify-center items-center h-full mb-5">
-    <app-button-file-upload
-      texto="  Pesos y umbrales"
+  <div class="mb-5">
+    <label for="" class="text-white font-semibold"
+      >Carga pesos y umbrales finales</label
+    >
+    <input
+      class="bg-green-300"
       type="file"
       formControlName="pesosumbrales"
       (change)="cargarArchivo($event, 'pesosumbrales')"
-    >
-    </app-button-file-upload>
+    />
   </div>
 
   <label for="" class="text-white font-semibold">Patrones a simular</label>
